@@ -1,34 +1,32 @@
 const videoElem = document.getElementById("video");
 const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
+const test = document.getElementById("test");
+
 
 // Options for getDisplayMedia()
 var displayMediaOptions = {
-    video: {
-        cursor: "always",
-        width: 640,
-        height: 480
-    },
+    video: true,
     audio: false
-    
 };
 
 // Set event listeners for the start and stop buttons
-// startElem.addEventListener("click", function (evt) {
-//     console.log("aiueo");
-//     startCapture();
-// }, false);
-window.onload = function() {
-    console.log("はじまったよん")
+startElem.addEventListener("onclick", function (evt) {
+    console.log("startボタン押したよん");
+    console.log(test)
     startCapture();
-}
+}, false);
 
-stopElem.addEventListener("click", function (evt) {
+stopElem.addEventListener("onclick", function (evt) {
     console.log("aiueo");
     stopCapture();
 }, false);
 
-async function startCapture() {
+test.addEventListener("onclick", function(evt) {
+    console.log("testtesttest");
+});
+
+async function startCapture(evt) {
     try {
         videoElem.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
     } catch (err) {
@@ -38,7 +36,15 @@ async function startCapture() {
 
 function stopCapture(evt) {
     let tracks = videoElem.srcObject.getTracks();
-
+    
     tracks.forEach(track => track.stop());
     videoElem.srcObject = null;
 }
+window.onload = function() {
+    console.log("はじまったよん")
+    console.log("aaaaaa")
+    startCapture();
+    console.log(startElem)
+    console.log(test)
+}
+

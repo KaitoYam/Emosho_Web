@@ -1,12 +1,28 @@
 window.addEventListener('DOMContentLoaded', init);
+document.addEventListener('keypress', press_button)
+
+function press_button(key){
+  if(key.code == 'Enter'){
+    console.log("press: "+ key.code);
+    var canvas = document.getElementById('screenshot');
+    let downloadEle = document.createElement("a");
+    downloadEle.href = canvas.toDataURL('image/png', 1.0);
+    console.log(canvas.toDataURL('image/png', 1.0));
+    downloadEle.download = "canvas.png";
+    downloadEle.click();
+  }
+
+}
+
 
 function init() {
-  const width = 960;
-  const height = 540;
+  const width = document.body.clientWidth;
+  const height = window.innerHeight;
 
   // レンダラーを作成
   const renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector('#myCanvas')
+    canvas: document.querySelector('#myCanvas'),
+    preserveDrawingBuffer: true
   });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(width, height);
@@ -26,17 +42,17 @@ function init() {
   controls.dampingFactor = 0.2;
 
   // 動画テクスチャのマテリアル作成
-  const video = document.querySelector('video')
+  const video = document.getElementById('video')
   // video.srcObject = stream
   // video.autoplay = true
-  // const videoTexture = new THREE.videoTexture(video)
-  // videoTexture.minFilter = THREE.LinearFilter 
+  const videoTexture = new THREE.VideoTexture(video)
+  videoTexture.minFilter = THREE.LinearFilter 
   // const material = new THREE.MeshPhongMaterial({map: videoTexture}) // 動画テクスチャのマテリアルの作成
 
 
   // 箱を作成
-  const geometry = new THREE.BoxGeometry(500, 500, 500);
-  const material = new THREE.MeshStandardMaterial({color: 0x0000FF});
+  const geometry = new THREE.PlaneGeometry(width, width*10/16);
+  const material = new THREE.MeshStandardMaterial({map: videoTexture, roughness:0});
   const box = new THREE.Mesh(geometry, material);
   scene.add(box);
 
@@ -52,6 +68,7 @@ function init() {
 
   function tick() {
     requestAnimationFrame(tick);
+    // camera.position.y += 1;
 
     // 箱を回転させる
     // box.rotation.x += 0.01;
