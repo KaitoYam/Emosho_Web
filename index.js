@@ -1,17 +1,33 @@
 window.addEventListener('DOMContentLoaded', init);
 document.addEventListener('keypress', press_button)
+filter = document.getElementById('filter')
+filter_num = 0
+var filter_imgs = [
+  '',
+  './img/フィルター01.png',
+  './img/フィルター02.jpg', 
+  './img/フィルター03.png', 
+  './img/フィルター04.jpg',
+  './img/フィルター05.jpg',
+  './img/フィルター07.jpg'
+]
 
 function press_button(key){
   if(key.code == 'Enter'){
     console.log("press: "+ key.code);
-    var canvas = document.getElementById('screenshot');
+    var canvas = document.getElementById('myCanvas');
     let downloadEle = document.createElement("a");
     downloadEle.href = canvas.toDataURL('image/png', 1.0);
     console.log(canvas.toDataURL('image/png', 1.0));
     downloadEle.download = "canvas.png";
     downloadEle.click();
+  }else if(key.code == "KeyF"){
+    filter_num ++;
+    if(filter_num >= filter_imgs.length){
+      filter_num = 0;
+    }
+    filter.src = filter_imgs[filter_num]
   }
-
 }
 
 
