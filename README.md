@@ -1,6 +1,8 @@
 # Emosho
 Emoshoは画面の傾きや、距離、フィルターなどをリアルタイムで調整できるスクリーンショットツールです。
 
+Github Pages: https://kaitoyam.github.io/Emosho_Web/
+
 
 ### 推奨環境
 PCを使用してください。
