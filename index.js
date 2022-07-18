@@ -12,6 +12,14 @@ var filter_imgs = [
   './img/フィルター07.jpg'
 ]
 
+//フィルターのopacity変更
+var filter_opacity = document.getElementsByClassName("range_opacity_filter")[0] 
+filter_opacity.addEventListener('change', function(){
+  document.getElementsByClassName("filter")[0].style.opacity = filter_opacity.value;
+  console.log(filter_opacity.value)
+})
+
+
 function press_button(key){
   if(key.code == 'Enter'){
     console.log("press: "+ key.code);
