@@ -6,25 +6,24 @@ const test = document.getElementById("test");
 
 // Options for getDisplayMedia()
 var displayMediaOptions = {
-    video: true,
+    video: {
+        width: 4*screen.width,
+        height: 4*screen.height
+    },
     audio: false
 };
 
 // Set event listeners for the start and stop buttons
-startElem.addEventListener("onclick", function (evt) {
-    console.log("startボタン押したよん");
-    console.log(test)
-    startCapture();
-}, false);
+// startElem.addEventListener("onclick", function (evt) {
+//     console.log("startボタン押したよん");
+//     console.log(test)
+//     startCapture();
+// }, false);
 
-stopElem.addEventListener("onclick", function (evt) {
-    console.log("aiueo");
-    stopCapture();
-}, false);
-
-test.addEventListener("onclick", function(evt) {
-    console.log("testtesttest");
-});
+// stopElem.addEventListener("onclick", function (evt) {
+//     console.log("aiueo");
+//     stopCapture();
+// }, false);
 
 async function startCapture(evt) {
     try {

@@ -15,10 +15,57 @@ var filter_imgs = [
 //フィルターのopacity変更
 var filter_opacity = document.getElementsByClassName("range_opacity_filter")[0] 
 filter_opacity.addEventListener('change', function(){
-  document.getElementsByClassName("filter")[0].style.opacity = filter_opacity.value;
+  document.getElementsByClassName("filter")[0].style.opacity = filter_opacity.value ;
   console.log(filter_opacity.value)
 })
 
+//グレースケール
+var grayscale = document.getElementsByClassName("range_grayscale")[0] 
+grayscale.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%)";
+})
+
+//明度の調整
+var brightness = document.getElementsByClassName("range_brightness")[0] 
+brightness.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%)";
+})
+
+//セピアの調整
+var sepia = document.getElementsByClassName("range_sepia")[0] 
+sepia.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%)";
+})
+
+//コントラストの調整
+var contrast = document.getElementsByClassName("range_contrast")[0] 
+contrast.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%)";
+})
+
+//彩度の調整
+var saturate = document.getElementsByClassName("range_saturate")[0] 
+saturate.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%) saturate(" + saturate.value +"%) hue-rotate(" + hue_rotate.value + "deg) invert(" + invert.value + "%) blur(" + blur.value + "px)";
+})
+
+//色調回転の調整
+var hue_rotate = document.getElementsByClassName("range_hue-rotate")[0] 
+hue_rotate.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%) saturate(" + saturate.value +"%) hue-rotate(" + hue_rotate.value + "deg) invert(" + invert.value + "%) blur(" + blur.value + "px)";
+})
+
+//階調反転の調整
+var invert = document.getElementsByClassName("range_invert")[0] 
+invert.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%) saturate(" + saturate.value +"%) hue-rotate(" + hue_rotate.value + "deg) invert(" + invert.value + "%) blur(" + blur.value + "px)";
+})
+
+//ぼかしの調整
+var blur = document.getElementsByClassName("range_blur")[0] 
+blur.addEventListener('change', function(){
+  document.getElementById("myCanvas").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%) saturate(" + saturate.value +"%) hue-rotate(" + hue_rotate.value + "deg) invert(" + invert.value + "%) blur(" + blur.value + "px)";
+})
 
 function press_button(key){
   if(key.code == 'Enter'){

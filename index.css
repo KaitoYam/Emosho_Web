@@ -14,7 +14,18 @@ video{
 }
 
 .range_opacity_filter{
-  position: absolute;
+  /* position: absolute;
   top: 10px;
-  left: 10px;
+  left: 10px; */
+}
+
+.bold{
+  font-weight: bold;
+}
+.paramater{
+  padding-left: 20px;
+}
+
+canvas{
+  filter: grayscale(0%) brightness(100%);
 }

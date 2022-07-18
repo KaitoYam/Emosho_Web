@@ -11,14 +11,33 @@
     <canvas id="myCanvas"></canvas>
     <img src="" id="filter" class="filter">  
     <video id="video" autoplay ></video>
-    <p>This example shows you the contents of the selected part of your display.
-      Click the Start Capture button to begin.</p>
-    <button id="start">Start Capture</button>&nbsp;<button id="stop">Stop Capture</button>
-    <button id="test">
+    <!-- <p>This example shows you the contents of the selected part of your display.
+      Click the Start Capture button to begin.</p> -->
+    <!-- <button id="start">Start Capture</button>&nbsp;<button id="stop">Stop Capture</button> -->
+    <!-- <button id="test">
       テスト
-    </button>
-    <input type="range" min="0.0" max="1.0" step="0.05" class="range_opacity_filter">
-    <a id="download" href="#" download="canvas.jpg">ダウンロード</a>
+    </button> -->
+    <div class="paramater">
+      <p class="bold">フィルターのOpacity</p>
+      <input type="range" min="0.0" max="1.0" step="0.05" class="range_opacity_filter" value="0.5">
+      <p class="bold">グレースケール</p>
+      <input type="range" min="0" max="100" step="5" class="range_grayscale" value="0">
+      <p class="bold">明るさ</p>
+      <input type="range" min="0" max="200" step="10" class="range_brightness" value="100">
+      <p class="bold">セピア</p>
+      <input type="range" min="0" max="100" step="5" class="range_sepia" value="0">
+      <p class="bold">コントラスト</p>
+      <input type="range" min="0" max="200" step="10" class="range_contrast" value="100">
+      <p class="bold">彩度</p>
+      <input type="range" min="0" max="200" step="10" class="range_saturate" value="100">
+      <p class="bold">色調回転</p>
+      <input type="range" min="0" max="360" step="10" class="range_hue-rotate" value="0">
+      <p class="bold">階調反転</p>
+      <input type="range" min="0" max="360" step="10" class="range_invert" value="0">
+      <p class="bold">ぼかし</p>
+      <input type="range" min="0" max="10" step="0.5" class="range_blur" value="0">
+    </div>
+    <a id="download" href="#" download="canvas.jpg" style="display:none;">ダウンロード</a>
     <img id="output" src="">
     <script src="ExampleSimpleScreenCapture.js"></script>
     <script src="index.js"></script>
