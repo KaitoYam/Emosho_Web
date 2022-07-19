@@ -122,7 +122,7 @@ function init() {
 
 
   // 箱を作成
-  const geometry = new THREE.PlaneGeometry(width, width*10/16);
+  const geometry = new THREE.PlaneGeometry(width, width*9/16);
   const material = new THREE.MeshStandardMaterial({map: videoTexture, roughness:0});
   const box = new THREE.Mesh(geometry, material);
   scene.add(box);
