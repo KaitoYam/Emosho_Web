@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', init);
 document.addEventListener('keypress', press_button)
+var aspect_rate = 10/16
 filter = document.getElementById('filter')
 filter_num = 0
 var filter_imgs = [
@@ -67,6 +68,16 @@ blur.addEventListener('change', function(){
   document.getElementById("add_filter").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%) saturate(" + saturate.value +"%) hue-rotate(" + hue_rotate.value + "deg) invert(" + invert.value + "%) blur(" + blur.value + "px)";
 })
 
+var change_aspect = document.getElementById('change_aspect')[0]
+change_aspect.addEventListener('click', function(){
+  console.log("pu")
+  if(aspect_rate == 9/16){
+    aspect_rate = 10/16;
+  }else if(aspect_rate == 10/16){
+    aspect_rate = 9/16;
+  }
+})
+
 function press_button(key){
   if(key.code == 'Enter'){
     console.log("press: "+ key.code);
@@ -129,7 +140,7 @@ function init() {
 
 
   // 箱を作成
-  const geometry = new THREE.PlaneGeometry(width, width*9/16);
+  const geometry = new THREE.PlaneGeometry(width, width*aspect_rate);
   const material = new THREE.MeshStandardMaterial({map: videoTexture, roughness:0});
   const box = new THREE.Mesh(geometry, material);
   scene.add(box);
