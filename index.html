@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <title>Emosho:</title>
+    <script src="html2canvas.js"></script>
     <script src="three.js"></script>
     <script src="OrbitControls.js"></script>
     <link rel="stylesheet" href="./index.css">
   </head>
   <body>
-    <div id="add_filter">
-      <canvas id="myCanvas"></canvas>
-      <img src="" id="filter" class="filter">  
-    </div>
+      <div id="add_filter">
+        <canvas id="myCanvas"></canvas>
+        <img src="" id="filter" class="filter">  
+      </div>
     <video id="video" autoplay ></video>
     <!-- <p>This example shows you the contents of the selected part of your display.
       Click the Start Capture button to begin.</p> -->
@@ -41,6 +42,9 @@
       <p class="bold">アスペクト比</p>
       <input type="button" value="16:9" id="change_aspect">
       <input type="button" value="16:10" id="change_aspect">
+      <p class="bgc bold">背景色（16進数）</p>
+      <input type="text" id="change_bgc">
+    
     </div>
     <a id="download" href="#" download="canvas.jpg" style="display:none;">ダウンロード</a>
     <img id="output" src="">

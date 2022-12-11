@@ -3,6 +3,8 @@ document.addEventListener('keypress', press_button)
 var aspect_rate = 10/16
 filter = document.getElementById('filter')
 filter_num = 0
+var bgc = 0x000000;
+
 var filter_imgs = [
   '',
   './img/フィルター01.png',
@@ -13,11 +15,28 @@ var filter_imgs = [
   './img/フィルター07.jpg'
 ]
 
+
+
+//ボタンを押されたら
+
+// html2canvas(document.body).then(function(canvas) {
+//     document.body.appendChild(canvas);
+// });
+
+//背景色の変更
+var bgc = document.getElementById("change_bgc")
+bgc.addEventListener('change', change_bgc)
+
+//カーソルの形
+// document.getElementById("add_filter").style.cursor = "help"
+
 //フィルターのopacity変更
 var filter_opacity = document.getElementsByClassName("range_opacity_filter")[0] 
 filter_opacity.addEventListener('change', function(){
   document.getElementsByClassName("filter")[0].style.opacity = filter_opacity.value ;
   console.log(filter_opacity.value)
+  bgc = 0xffffff;
+  console.log(bgc)
 })
 
 //グレースケール
@@ -68,6 +87,7 @@ blur.addEventListener('change', function(){
   document.getElementById("add_filter").style.filter = "grayscale("+ grayscale.value+"%) brightness(" + brightness.value +"%) sepia(" + sepia.value + "%) contrast(" + contrast.value + "%) saturate(" + saturate.value +"%) hue-rotate(" + hue_rotate.value + "deg) invert(" + invert.value + "%) blur(" + blur.value + "px)";
 })
 
+//アスペクト比の変更
 var change_aspect = document.getElementById('change_aspect')[0]
 change_aspect.addEventListener('click', function(){
   console.log("pu")
@@ -79,7 +99,8 @@ change_aspect.addEventListener('click', function(){
 })
 
 function press_button(key){
-  if(key.code == 'Enter'){
+  //Sキーを押した時
+  if(key.code === 'KeyS'){
     console.log("press: "+ key.code);
     var canvas = document.getElementById('myCanvas');
     let downloadEle = document.createElement("a");
@@ -87,19 +108,37 @@ function press_button(key){
     console.log(canvas.toDataURL('image/png', 1.0));
     downloadEle.download = "canvas.png";
     downloadEle.click();
-  }else if(key.code == "KeyF"){
+  }
+  //Iキーを押した時
+  else if(key.code === "KeyI"){
     filter_num ++;
     if(filter_num >= filter_imgs.length){
       filter_num = 0;
     }
     filter.src = filter_imgs[filter_num]
-  }else if(key.code == "KeyE"){
+  }
+  //Pキーを押した時
+  else if(key.code === "KeyP"){
     paramater = document.querySelector('.paramater');
     if (paramater.id == ""){
       paramater.id = "display_none";
     }else{
       paramater.id = ""
     }
+  }
+  //エンターキーを押した時
+  else if(key.code === "Enter"){
+    console.info("Enter押したね？")
+    element = document.getElementById("add_filter")
+    console.log(element)
+    html2canvas(element, {
+      proxy: true,
+      useCORS: true,
+      onrendered: function(canvas) {
+          console.log("あいうえお")
+          // canvas.toDataURL();
+      }
+    });
   }
 }
 
@@ -119,12 +158,15 @@ function init() {
   // シーンを作成
   const scene = new THREE.Scene();
 
+  // シーンの背景色を決定
+  renderer.setClearColor(bgc)
+
   // カメラを作成
   const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
   camera.position.set(0, 0, 1000);
 
   //コントローラーを作成
-  const controls = new THREE.OrbitControls(camera, document.body);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
   // 滑らかにカメラコントローラーを制御する
   controls.enableDamping = true;
@@ -137,7 +179,6 @@ function init() {
   const videoTexture = new THREE.VideoTexture(video)
   videoTexture.minFilter = THREE.LinearFilter 
   // const material = new THREE.MeshPhongMaterial({map: videoTexture}) // 動画テクスチャのマテリアルの作成
-
 
   // 箱を作成
   const geometry = new THREE.PlaneGeometry(width, width*aspect_rate);
@@ -168,3 +209,15 @@ function init() {
     renderer.render(scene, camera);
   }
 }
+
+function change_bgc(){
+  console.log(bgc.value)
+  // レンダラーを作成
+  const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#myCanvas'),
+    preserveDrawingBuffer: true
+  });
+  renderer.setClearColor("#"+bgc.value);
+}
+
+
